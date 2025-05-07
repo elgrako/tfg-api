@@ -1,4 +1,4 @@
-package com.api.tfg.dto;
+package com.api.tfg.dto.registro;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,10 +8,7 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +17,7 @@ import jakarta.validation.constraints.Size;
 public class RegistroDTO implements Serializable{
 
     @Serial
-    private static final long serialVersionUID = 11823L;
+    private static final long serialVersionUID = 1L;
 
     @NotBlank
     private String nombre;
