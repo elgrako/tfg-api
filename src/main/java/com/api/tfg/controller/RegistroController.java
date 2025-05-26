@@ -1,7 +1,6 @@
 package com.api.tfg.controller;
 
 import com.api.tfg.dto.registro.RegistroDTO;
-import com.api.tfg.dto.registro.CrearRegistroDTO;
 import com.api.tfg.entity.Registro;
 import com.api.tfg.mapper.Mapper;
 import com.api.tfg.service.registro.IRegistroService;
