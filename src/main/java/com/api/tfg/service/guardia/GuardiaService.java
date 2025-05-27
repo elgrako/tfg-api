@@ -1,6 +1,7 @@
 package com.api.tfg.service.guardia;
 
 import com.api.tfg.entity.Guardia;
+import com.api.tfg.exception.ResourceNotFoundException;
 import com.api.tfg.repository.guardia.IGuardiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public class GuardiaService implements IGuardiaService {
 
     @Override
     public Guardia findGuardiaById(Long id) {
-        return guardiaRepository.findById(id).orElse(null);
+        return guardiaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Guardia", id));
     }
 
     @Override
@@ -29,18 +31,18 @@ public class GuardiaService implements IGuardiaService {
     }
 
     @Override
-    public Guardia updateGuardia(Long id, Guardia newGuardia) throws Exception {
+    public Guardia updateGuardia(Long id, Guardia newGuardia) {
         guardiaRepository.findById(id)
-                .orElseThrow(() -> new Exception("No se encontró la guardia con el id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Guardia", id));
 
         newGuardia.setId(id);
         return guardiaRepository.save(newGuardia);
     }
 
     @Override
-    public boolean deleteGuardia(Long id) throws Exception {
+    public boolean deleteGuardia(Long id) {
         if (!guardiaRepository.existsById(id)) {
-            throw new Exception("No se encontró la guardia con el id: " + id);
+            throw new ResourceNotFoundException("Guardia", id);
         }
         guardiaRepository.deleteById(id);
         return true;

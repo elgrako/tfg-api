@@ -1,4 +1,4 @@
-package com.api.tfg.repository.guardia;
+package com.api.tfg.repository.recursoguardia;
 
 import com.api.tfg.entity.RecursoGuardia;
 import org.springframework.data.repository.CrudRepository;

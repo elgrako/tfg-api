@@ -1,4 +1,4 @@
-package com.api.tfg.repository.guardia;
+package com.api.tfg.repository.recursoextra;
 
 import com.api.tfg.entity.RecursoExtraOrdinario;
 import org.springframework.data.repository.CrudRepository;

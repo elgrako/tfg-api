@@ -1,4 +1,4 @@
-package com.api.tfg.dto.guardia;
+package com.api.tfg.dto.apelacionguardia;
 
 import jakarta.validation.constraints.*;
 import lombok.*;

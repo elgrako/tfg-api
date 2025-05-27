@@ -8,8 +8,8 @@ public interface IRegistroService {
     Registro findRegistroById(Long id);
     Registro findRegistroByNombre(String nombre);
     Registro addRegistro(Registro registro);
-    Registro updateRegistro(Long id, Registro newRegistro) throws Exception;
-    boolean deleteRegistro(Long id) throws Exception;
+    Registro updateRegistro(Long id, Registro newRegistro);
+    boolean deleteRegistro(Long id);
     List<Registro> findByPresentado(boolean presentado);
     List<Registro> findByValidado(boolean validado);
     List<Registro> findByPagado(boolean pagado);

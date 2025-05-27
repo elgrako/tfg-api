@@ -7,8 +7,8 @@ public interface IGuardiaService {
     List<Guardia> findAllGuardias();
     Guardia findGuardiaById(Long id);
     Guardia addGuardia(Guardia guardia);
-    Guardia updateGuardia(Long id, Guardia newGuardia) throws Exception;
-    boolean deleteGuardia(Long id) throws Exception;
+    Guardia updateGuardia(Long id, Guardia newGuardia);
+    boolean deleteGuardia(Long id);
     List<Guardia> findByNombreAsistidoContaining(String nombre);
     List<Guardia> findByPorJuzgado(boolean porJuzgado);
     List<Guardia> findByCobrado(boolean cobrado);
