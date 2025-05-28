@@ -17,13 +17,19 @@ public class Registro {
     @Column(unique = true, nullable = false)
     private String nombre;
 
+    @Column
     private String dni;
+
+    @Column
     private String nExpediente;
 
     @Column(precision = 10, scale = 2)
     private BigDecimal euros;
 
+    @Column
     private String email;
+
+    @Column
     private Integer telefono;
 
     @Column(columnDefinition = "boolean default false")
@@ -35,6 +41,7 @@ public class Registro {
     @Column(columnDefinition = "boolean default false")
     private Boolean pagado = false;
 
+    @Column
     private Integer nTalon;
 
     @Column(length = 1000)

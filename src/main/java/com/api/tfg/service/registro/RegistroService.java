@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RegistroService implements IRegistroService {
@@ -77,5 +78,20 @@ public class RegistroService implements IRegistroService {
     @Override
     public List<Registro> findByPagado(boolean pagado) {
         return registroRepository.findByPagado(pagado);
+    }
+
+    @Override
+    public Map<String, Object> getSituacion1(Long id) {
+        return registroRepository.findSituacion1ById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Registro", id));
+    }
+
+
+    @Override
+    public void updateSituacion1(Long id, boolean presentado, boolean validado, boolean pagado, Integer nTalon, String comentarios) {
+        if (!registroRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Registro", id);
+        }
+        registroRepository.updateSituacion1(id, presentado, validado, pagado, nTalon, comentarios);
     }
 }

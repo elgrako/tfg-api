@@ -2,7 +2,6 @@ package com.api.tfg.controller.registro;
 
 import com.api.tfg.dto.registro.RegistroDTO;
 import com.api.tfg.entity.Registro;
-import com.api.tfg.exception.ResourceNotFoundException;
 import com.api.tfg.mapper.Mapper;
 import com.api.tfg.service.registro.IRegistroService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -44,9 +44,6 @@ public class RegistroController {
     @Operation(summary = "Obtener registro por ID")
     public ResponseEntity<RegistroDTO> getOne(@PathVariable Long id) {
         Registro registro = registroService.findRegistroById(id);
-        if (registro == null) {
-            throw new ResourceNotFoundException("Registro", id);
-        }
         return ResponseEntity.ok(mapper.mapType(registro, RegistroDTO.class));
     }
 
@@ -70,5 +67,34 @@ public class RegistroController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         registroService.deleteRegistro(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/situacion1")
+    @Operation(summary = "Obtener datos de situación1")
+    public ResponseEntity<Map<String, Object>> getSituacion1(@PathVariable Long id) {
+        Map<String, Object> situacion = registroService.getSituacion1(id);
+        return ResponseEntity.ok(situacion);
+    }
+
+    @PatchMapping("/{id}/situacion1")
+    @Operation(summary = "Actualizar datos de situación1")
+    public ResponseEntity<Void> updateSituacion1(
+            @PathVariable Long id,
+            @RequestParam boolean presentado,
+            @RequestParam boolean validado,
+            @RequestParam boolean pagado,
+            @RequestParam(required = false) Integer nTalon,
+            @RequestParam(required = false) String comentarios) {
+
+        registroService.updateSituacion1(
+                id,
+                presentado,
+                validado,
+                pagado,
+                nTalon,
+                comentarios
+        );
+
+        return ResponseEntity.noContent().build();
     }
 }

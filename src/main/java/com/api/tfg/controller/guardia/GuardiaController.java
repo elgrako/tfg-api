@@ -2,6 +2,7 @@ package com.api.tfg.controller.guardia;
 
 import com.api.tfg.dto.guardia.GuardiaDTO;
 import com.api.tfg.entity.Guardia;
+import com.api.tfg.exception.ResourceNotFoundException;
 import com.api.tfg.mapper.Mapper;
 import com.api.tfg.service.guardia.IGuardiaService;
 
@@ -44,6 +45,9 @@ public class GuardiaController {
     @Operation(summary = "Obtener guardia por ID")
     public ResponseEntity<GuardiaDTO> getById(@PathVariable Long id) {
         Guardia guardia = guardiaService.findGuardiaById(id);
+        if (guardia == null) {
+            throw new ResourceNotFoundException("Guardia", id);
+        }
         return ResponseEntity.ok(mapper.mapType(guardia, GuardiaDTO.class));
     }
 
