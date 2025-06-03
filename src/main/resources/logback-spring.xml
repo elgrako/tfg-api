@@ -1,6 +1,7 @@
 <configuration>
 
     <property name="LOG_PATH" value="/home/ubuntu/logs" />
+    <property name="LOG_NAME" value="tfgdb" />
     <property name="LOG_FILE" value="${LOG_PATH}/tfg-app.log"/>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
