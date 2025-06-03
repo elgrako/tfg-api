@@ -2,10 +2,12 @@ package com.api.tfg.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "Guardia")
+@Table(name = "guardia")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Guardia {
 
@@ -16,10 +18,10 @@ public class Guardia {
     @Column(nullable = false)
     private String nombreAsistido;
 
-    @Column(nullable = false)
-    private String diaActuacion;
+    @Column(nullable = false, name = "dia_actualizacion")
+    private LocalDate diaActuacion;
 
-    @Column(columnDefinition = "boolean default false")
+    @Column(columnDefinition = "boolean default false", name = "por_juzgado")
     private Boolean porJuzgado = false;
 
     @Column(columnDefinition = "boolean default false")

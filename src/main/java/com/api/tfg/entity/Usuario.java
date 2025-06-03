@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Usuario {
 

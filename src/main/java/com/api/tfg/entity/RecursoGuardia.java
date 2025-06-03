@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "RecursoGuardia")
+@Table(name = "recurso_guardia")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RecursoGuardia {
 
@@ -16,6 +16,7 @@ public class RecursoGuardia {
     @JoinColumn(name = "guardia_id", nullable = false)
     private Guardia guardia;
 
+    @Column(name = "n_expediente")
     private String nExpediente;
 
     @Column(columnDefinition = "boolean default false")

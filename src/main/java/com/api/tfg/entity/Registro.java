@@ -6,7 +6,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "Datos")
+@Table(name = "registro")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Registro {
 
@@ -20,7 +20,7 @@ public class Registro {
     @Column
     private String dni;
 
-    @Column
+    @Column(name = "n_expediente")
     private String nExpediente;
 
     @Column(precision = 10, scale = 2)
@@ -41,7 +41,7 @@ public class Registro {
     @Column(columnDefinition = "boolean default false")
     private Boolean pagado = false;
 
-    @Column
+    @Column(name = "n_talon")
     private Integer nTalon;
 
     @Column(length = 1000)

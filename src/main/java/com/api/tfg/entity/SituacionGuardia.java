@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "SituacionGuardia")
+@Table(name = "situacion_guardia")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class SituacionGuardia {
 
@@ -19,7 +19,10 @@ public class SituacionGuardia {
     @Column(length = 1000)
     private String comentarios;
 
+    @Column(name = "n_talon")
     private String nTalon;
+
+    @Column
     private String euros;
 
     @Column(columnDefinition = "boolean default false")
