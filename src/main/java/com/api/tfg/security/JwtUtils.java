@@ -1,6 +1,7 @@
 package com.api.tfg.security;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    private final String jwtSecret = "Futiera4.";
+    private final String jwtSecret = "Futiera4_Futiera4_Futiera4_Futiera4";
     private final long jwtExpirationMs = 86400000; // 1 día
 
     private SecretKey getSigningKey() {
@@ -22,9 +23,11 @@ public class JwtUtils {
                 .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-                .signWith(getSigningKey())
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
+
 
     public String getUsernameFromToken(String token) {
         return Jwts.parser()
