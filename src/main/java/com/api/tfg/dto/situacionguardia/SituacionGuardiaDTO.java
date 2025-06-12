@@ -20,6 +20,8 @@ public class SituacionGuardiaDTO {
     private String euros;
 
     private Boolean presentado;
+
     private Boolean validado;
+
     private Boolean pagado;
 }

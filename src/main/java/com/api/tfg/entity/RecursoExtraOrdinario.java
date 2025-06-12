@@ -17,7 +17,7 @@ public class RecursoExtraOrdinario {
     private Guardia guardia;
 
     @Column(name = "n_expediente")
-    private Integer nExpediente;
+    private String  nExpediente;
 
     @Column(columnDefinition = "boolean default false")
     private Boolean admitido = false;

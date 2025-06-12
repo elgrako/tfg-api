@@ -14,6 +14,8 @@ public class ApelacionGuardiaDTO {
     private String nExpediente;
 
     private Boolean admitido;
+
     private Boolean presentado;
+
     private Boolean sentencia;
 }

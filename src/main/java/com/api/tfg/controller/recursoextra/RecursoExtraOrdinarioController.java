@@ -40,8 +40,8 @@ public class RecursoExtraOrdinarioController {
     @PostMapping
     @Operation(summary = "Crear nuevo recurso extraordinario")
     public ResponseEntity<RecursoExtraOrdinarioDTO> create(@Valid @RequestBody RecursoExtraOrdinarioDTO dto) {
-        Guardia guardia = guardiaRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+        Guardia guardia = guardiaRepository.findById(dto.getGuardiaId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getGuardiaId()));
 
         RecursoExtraOrdinario recurso = new RecursoExtraOrdinario();
         recurso.setGuardia(guardia);
@@ -55,8 +55,8 @@ public class RecursoExtraOrdinarioController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar recurso extraordinario")
     public ResponseEntity<RecursoExtraOrdinarioDTO> update(@PathVariable Long id, @Valid @RequestBody RecursoExtraOrdinarioDTO dto) {
-        Guardia guardia = guardiaRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+        Guardia guardia = guardiaRepository.findById(dto.getGuardiaId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getGuardiaId()));
 
         RecursoExtraOrdinario recurso = new RecursoExtraOrdinario();
         recurso.setId(id);

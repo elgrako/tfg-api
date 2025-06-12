@@ -40,8 +40,8 @@ public class RecursoGuardiaController {
     @PostMapping
     @Operation(summary = "Crear nuevo recurso de guardia")
     public ResponseEntity<RecursoGuardiaDTO> create(@Valid @RequestBody RecursoGuardiaDTO dto) {
-        Guardia guardia = guardiaRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+        Guardia guardia = guardiaRepository.findById(dto.getGuardiaId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getGuardiaId()));
 
         RecursoGuardia recurso = new RecursoGuardia();
         recurso.setGuardia(guardia);
@@ -55,8 +55,8 @@ public class RecursoGuardiaController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar recurso de guardia")
     public ResponseEntity<RecursoGuardiaDTO> update(@PathVariable Long id, @Valid @RequestBody RecursoGuardiaDTO dto) {
-        Guardia guardia = guardiaRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+        Guardia guardia = guardiaRepository.findById(dto.getGuardiaId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getGuardiaId()));
 
         RecursoGuardia recurso = new RecursoGuardia();
         recurso.setId(id);

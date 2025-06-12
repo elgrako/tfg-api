@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS guardia (
 INSERT INTO roles (id, name) VALUES (1, 'ROLE_ADMIN')
 ON DUPLICATE KEY UPDATE name = name;
 
-INSERT INTO roles (id, name) VALUES (2, 'ROLE_USUARIO')
+INSERT INTO roles (id, name) VALUES (2, 'ROLE_USER')
 ON DUPLICATE KEY UPDATE name = name;
 
 CREATE TABLE IF NOT EXISTS apelacion_guardia (
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS apelacion_guardia (
 CREATE TABLE IF NOT EXISTS recurso_extra_ordinario (
                                                      id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                                      guardia_id BIGINT NOT NULL,
-                                                     n_expediente INT,
+                                                     n_expediente VARCHAR(255),
                                                      admitido BOOLEAN DEFAULT FALSE,
                                                      FOREIGN KEY (guardia_id) REFERENCES guardia(id) ON DELETE CASCADE
 );
