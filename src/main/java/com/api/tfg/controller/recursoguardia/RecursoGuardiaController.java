@@ -1,8 +1,10 @@
 package com.api.tfg.controller.recursoguardia;
 
 import com.api.tfg.dto.recursoguardia.RecursoGuardiaDTO;
+import com.api.tfg.entity.Guardia;
 import com.api.tfg.entity.RecursoGuardia;
 import com.api.tfg.mapper.Mapper;
+import com.api.tfg.repository.guardia.IGuardiaRepository;
 import com.api.tfg.service.recursoguardia.IRecursoGuardiaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +25,9 @@ public class RecursoGuardiaController {
     private IRecursoGuardiaService recursoService;
 
     @Autowired
+    private IGuardiaRepository guardiaRepository;
+
+    @Autowired
     private Mapper mapper;
 
     @GetMapping("/guardia/{guardiaId}")
@@ -35,7 +40,14 @@ public class RecursoGuardiaController {
     @PostMapping
     @Operation(summary = "Crear nuevo recurso de guardia")
     public ResponseEntity<RecursoGuardiaDTO> create(@Valid @RequestBody RecursoGuardiaDTO dto) {
-        RecursoGuardia recurso = mapper.mapType(dto, RecursoGuardia.class);
+        Guardia guardia = guardiaRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+
+        RecursoGuardia recurso = new RecursoGuardia();
+        recurso.setGuardia(guardia);
+        recurso.setNExpediente(dto.getNExpediente());
+        recurso.setResuelto(dto.getResuelto());
+
         RecursoGuardia creado = recursoService.createRecurso(recurso);
         return ResponseEntity.ok(mapper.mapType(creado, RecursoGuardiaDTO.class));
     }
@@ -43,7 +55,15 @@ public class RecursoGuardiaController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar recurso de guardia")
     public ResponseEntity<RecursoGuardiaDTO> update(@PathVariable Long id, @Valid @RequestBody RecursoGuardiaDTO dto) {
-        RecursoGuardia recurso = mapper.mapType(dto, RecursoGuardia.class);
+        Guardia guardia = guardiaRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+
+        RecursoGuardia recurso = new RecursoGuardia();
+        recurso.setId(id);
+        recurso.setGuardia(guardia);
+        recurso.setNExpediente(dto.getNExpediente());
+        recurso.setResuelto(dto.getResuelto());
+
         RecursoGuardia actualizado = recursoService.updateRecurso(id, recurso);
         return ResponseEntity.ok(mapper.mapType(actualizado, RecursoGuardiaDTO.class));
     }

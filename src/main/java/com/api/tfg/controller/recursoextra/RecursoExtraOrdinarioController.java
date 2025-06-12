@@ -1,8 +1,10 @@
 package com.api.tfg.controller.recursoextra;
 
 import com.api.tfg.dto.recursoextra.RecursoExtraOrdinarioDTO;
+import com.api.tfg.entity.Guardia;
 import com.api.tfg.entity.RecursoExtraOrdinario;
 import com.api.tfg.mapper.Mapper;
+import com.api.tfg.repository.guardia.IGuardiaRepository;
 import com.api.tfg.service.recursoextra.IRecursoExtraOrdinarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +25,9 @@ public class RecursoExtraOrdinarioController {
     private IRecursoExtraOrdinarioService recursoService;
 
     @Autowired
+    private IGuardiaRepository guardiaRepository;
+
+    @Autowired
     private Mapper mapper;
 
     @GetMapping("/guardia/{guardiaId}")
@@ -35,7 +40,14 @@ public class RecursoExtraOrdinarioController {
     @PostMapping
     @Operation(summary = "Crear nuevo recurso extraordinario")
     public ResponseEntity<RecursoExtraOrdinarioDTO> create(@Valid @RequestBody RecursoExtraOrdinarioDTO dto) {
-        RecursoExtraOrdinario recurso = mapper.mapType(dto, RecursoExtraOrdinario.class);
+        Guardia guardia = guardiaRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+
+        RecursoExtraOrdinario recurso = new RecursoExtraOrdinario();
+        recurso.setGuardia(guardia);
+        recurso.setNExpediente(dto.getNExpediente());
+        recurso.setAdmitido(dto.getAdmitido());
+
         RecursoExtraOrdinario creado = recursoService.createRecurso(recurso);
         return ResponseEntity.ok(mapper.mapType(creado, RecursoExtraOrdinarioDTO.class));
     }
@@ -43,7 +55,15 @@ public class RecursoExtraOrdinarioController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar recurso extraordinario")
     public ResponseEntity<RecursoExtraOrdinarioDTO> update(@PathVariable Long id, @Valid @RequestBody RecursoExtraOrdinarioDTO dto) {
-        RecursoExtraOrdinario recurso = mapper.mapType(dto, RecursoExtraOrdinario.class);
+        Guardia guardia = guardiaRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Guardia no encontrada con ID: " + dto.getId()));
+
+        RecursoExtraOrdinario recurso = new RecursoExtraOrdinario();
+        recurso.setId(id);
+        recurso.setGuardia(guardia);
+        recurso.setNExpediente(dto.getNExpediente());
+        recurso.setAdmitido(dto.getAdmitido());
+
         RecursoExtraOrdinario actualizado = recursoService.updateRecurso(id, recurso);
         return ResponseEntity.ok(mapper.mapType(actualizado, RecursoExtraOrdinarioDTO.class));
     }
