@@ -3,34 +3,27 @@ package com.api.tfg.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-
 @Entity
-@Table(name = "registro")
+@Table(name = "situacion_guardia")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class Registro {
+public class SituacionGuardia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String nombre;
+    @OneToOne
+    @JoinColumn(name = "guardia_id", nullable = false)
+    private Guardia guardia;
+
+    @Column(length = 1000)
+    private String comentarios;
+
+    @Column(name = "n_talon")
+    private String nTalon;
 
     @Column
-    private String dni;
-
-    @Column(name = "n_expediente")
-    private String nExpediente;
-
-    @Column(precision = 10, scale = 2)
-    private BigDecimal euros;
-
-    @Column
-    private String email;
-
-    @Column
-    private Integer telefono;
+    private String euros;
 
     @Column(columnDefinition = "boolean default false")
     private Boolean presentado = false;
@@ -40,10 +33,4 @@ public class Registro {
 
     @Column(columnDefinition = "boolean default false")
     private Boolean pagado = false;
-
-    @Column(name = "n_talon")
-    private Integer nTalon;
-
-    @Column(length = 1000)
-    private String comentarios;
 }
